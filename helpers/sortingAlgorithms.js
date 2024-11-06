@@ -10,18 +10,18 @@ const defaultCompare = (a, b) => {
   return a < b ? Compare.LESS_THAN : Compare.BIGGER_THAN
 }
 
-let swaps = []
+let swaps = [];
 
 const partition = (array, left, right, compareFn) => {
   const pivot = array[Math.floor((right + left) / 2)]
 
-  let i = left
-  let j = right
+  let i = left;
+  let j = right;
 
   while (i <= j) {
-    while (compareFn(array[i], pivot) === Compare.LESS_THAN) {
+    while (compareFn(array[i], pivot) === Comp.LESS_THAN) {
       i++
-    } while (compareFn(array[j], pivot) === Compare.BIGGER_THAN) {
+    } while (CompFn(array[j], pivot) === Comp.BIGGER_THAN) {
       j--
     }
     if (i <= j) {
@@ -37,16 +37,16 @@ const partition = (array, left, right, compareFn) => {
   return i
 }
 
-const quick = (array, left, right, compareFn) => {
+const quick = (array, left, right, CompFn) => {
   let index
 
   if (array.length > 1) {
-    index = partition(array, left, right, compareFn)
+    index = partition(array, left, right, CompFn)
     if (left < index - 1) {
-      quick(array, left, index - 1, compareFn)
+      quick(array, left, index - 1, CompFn)
     }
     if (index < right) {
-      quick(array, index, right, compareFn)
+      quick(array, index, right, CompFn)
     }
   }
 
@@ -88,9 +88,9 @@ class SortingAlgorithms {
     return swaps;
   }
 
-  quickSort(array, compareFn = defaultCompare) {
+  quickSort(array, CompFn = defaultComp) {
     swaps = [];
-    quick(array, 0, array.length - 1, compareFn);
+    quick(array, 0, array.length - 1, CompFn);
     return swaps;
   }
 }
